@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="lab12.Views.formulario"
+             xmlns:local="clr-namespace:lab12.ViewModels">
+
+
+    <ContentPage.BindingContext>
+        <local:FormularioViewModels />
+    </ContentPage.BindingContext>
+        
+
+        <ContentPage.Content>
+        <StackLayout Padding="20" Spacing="10">
+            <!-- Título -->
+            <Label Text="Título" VerticalOptions="CenterAndExpand" FontSize="Title"/>
+            <Entry Text="{Binding Title}"/>
+
+            <!-- Descripción -->
+            <Label Text="Descripción" VerticalOptions="CenterAndExpand" FontSize="Title" />
+            <Editor HeightRequest="100" Text="{Binding Descripcion}" AutoSize="TextChanges"/>
+
+            <!-- Estado (CheckBox) -->
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Estado" VerticalOptions="CenterAndExpand" FontSize="Title" />
+                <CheckBox IsChecked="{Binding Status}"/>
+            </StackLayout>
+
+            <!-- Botones -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="20" Spacing="10">
+                <Button FontSize="Small" Text="Guardar" Command="{Binding Save}" BackgroundColor="#82f3bc"/>
+                <Button FontSize="Small" Text="Listar" Command="{Binding Get}" BackgroundColor="#82f3bc"/>
+            </StackLayout>
+
+            <!-- Lista de Tareas -->
+            <ListView VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
+        ItemsSource="{Binding Tasks}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Title}" />
+                                <StackLayout Orientation="Horizontal" Spacing="20">
+                                    <Label Text="{Binding Descripcion}" HorizontalOptions="StartAndExpand"/>
+                                    <Switch IsToggled="{Binding Status}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
